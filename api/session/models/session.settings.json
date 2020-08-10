@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sessions",
+  "info": {
+    "name": "session"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "game": {
+      "model": "game",
+      "via": "session"
+    },
+    "gameId": {
+      "type": "uid"
+    },
+    "participants": {
+      "type": "json"
+    },
+    "state": {
+      "type": "string"
+    },
+    "result": {
+      "type": "biginteger"
+    },
+    "key": {
+      "type": "biginteger"
+    }
+  }
+}
