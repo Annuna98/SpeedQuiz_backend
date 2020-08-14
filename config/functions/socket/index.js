@@ -16,8 +16,12 @@ module.exports = () => {
       sessionKey: null
     };
 
+
+
     // Добавляем объект пользователя в общий массив пользователей
     connectedUsers.push(currentUser);
+
+
 
     // Ловим разрыв данного соединения
     socket.on('disconnect', () => {
@@ -32,12 +36,14 @@ module.exports = () => {
       if (sessionIndex > -1) {
         connectedUsers.splice(sessionIndex, 1);
       }
+
+
     });
 
     // Навешиваем обработчик на действия (экшены) с клиентов
     actionsHandler(socket, currentUser, connectedUsers);
 
-
+    console.log("currentUser.sessionKey: " + currentUser.sessionKey);
 
   });
 

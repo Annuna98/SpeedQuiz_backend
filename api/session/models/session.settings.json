@@ -13,9 +13,6 @@
       "model": "game",
       "via": "session"
     },
-    "gameId": {
-      "type": "uid"
-    },
     "participants": {
       "type": "json"
     },

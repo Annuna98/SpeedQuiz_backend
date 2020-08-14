@@ -33,7 +33,10 @@ const generateRandomSessionKey = (connectedUsers) => {
 
 module.exports = async (user, data, connectedUsers) => {
   const { gameId } = data;
-    //
+
+  console.log("gameId: " + gameId);
+
+
     // for (d in user){
     //   console.log("user: " + d);
     // }
@@ -76,8 +79,19 @@ module.exports = async (user, data, connectedUsers) => {
   // Генерируем новый sessionKey для запуска игры
   const sessionKey = generateRandomSessionKey(connectedUsers);
 
+  // отправляем ключ сессии в хранилище local storage
+  // if (typeof localStorage === "undefined" || localStorage === null) {
+  //   let LocalStorage = require('node-localstorage').LocalStorage;
+  //   localStorage = new LocalStorage('./scratch');
+  // }
+  // localStorage.setItem('session', sessionKey);
+
+
+
   // Устанавливаем эту сессию для пользователя
   user.sessionKey = sessionKey;
+
+  console.log("Start sessionKey: " + sessionKey);
 
   // Добавляем новую сессию в базу данных
   const session = await strapi
@@ -86,6 +100,8 @@ module.exports = async (user, data, connectedUsers) => {
       game: gameId,
       key: user.sessionKey
     });
+
+
 
 
   console.log('Your session key right now: ' + user.sessionKey);
@@ -102,4 +118,6 @@ module.exports = async (user, data, connectedUsers) => {
     success: true,
     data: session
   }));
+
+
 };

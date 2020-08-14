@@ -1,15 +1,20 @@
 module.exports = async (user, data, connectedUsers) => {
   const { sessionKey } = data;
 
-
-  for ( f in connectedUsers){
-    console.log("connnected users: " + f);
-  }
+  console.log("Join sessionKey: " + sessionKey);
 
 
+
+
+
+  // console.log(connectedUsers.find((user) => user.sessionKey == sessionKey));
+
+  // for (var i = 0; i < connectedUsers.length; i++) {
+  //   console.log(connectedUsers[i]);
+  // }
 
   // Проверяем, подключён ли хотя бы один пользователь к этой сессии (создатель)
-  if (!connectedUsers.find((user) => user.sessionKey === sessionKey)) {
+  if (!connectedUsers.find((user) => user.sessionKey == sessionKey)) {
     // Отправляем клиенту ошибку
     user.socket.emit('joined', JSON.stringify({
       success: false,
@@ -18,6 +23,7 @@ module.exports = async (user, data, connectedUsers) => {
 
     return;
   }
+
 
   // Получаем эту сессию из базы данных
   const session = await strapi
@@ -30,7 +36,7 @@ module.exports = async (user, data, connectedUsers) => {
       'game.questions'
     ]);
 
-  
+
 
   // Проверяем, вернула ли нам база данную сессию
   if (!session) {
@@ -46,6 +52,10 @@ module.exports = async (user, data, connectedUsers) => {
 
   // Устанавливаем эту сессию пользователю
   user.sessionKey = sessionKey;
+
+  for (let i = 0; i < connectedUsers.length; i++){
+    console.log(connectedUsers[i].sessionKey);
+  }
 
   console.log('User connected to session:', JSON.stringify(session));
 
