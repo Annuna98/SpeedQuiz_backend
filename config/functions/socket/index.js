@@ -1,8 +1,20 @@
 const actionsHandler = require('./actions');
+const express = require('express');
+const app = express();
+const path = require("path");
 
 const connectedUsers = [];
 
 module.exports = () => {
+  // const fileDirectory = path.resolve(__dirname, '/../../../../speed_quiz_frontend/dist/SpeedQuiz');
+  // app.use(express.static(fileDirectory));
+  // app.get("*", (req, res) => {
+  //   res.sendFile("index.html", {root: fileDirectory}, (err) => {
+  //     res.end();
+  //
+  //     if (err) throw err;
+  //   });
+  // });
   // Запускаем сокетное соединение на порту 3000
   const io = require('socket.io')(3000);
 
@@ -13,7 +25,9 @@ module.exports = () => {
     console.log("user connected");
     const currentUser = {
       socket: socket,
-      sessionKey: null
+      name: null,
+      sessionKey: null,
+      result: 0
     };
 
 

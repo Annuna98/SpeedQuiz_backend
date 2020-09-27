@@ -13,17 +13,14 @@
       "model": "game",
       "via": "session"
     },
-    "participants": {
-      "type": "json"
-    },
-    "state": {
-      "type": "string"
-    },
-    "result": {
-      "type": "biginteger"
-    },
     "key": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "unique": true
+    },
+    "participants": {
+      "unique": true,
+      "collection": "participant",
+      "via": "session"
     }
   }
 }

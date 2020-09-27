@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "participants",
+  "info": {
+    "name": "participant"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "result": {
+      "type": "integer"
+    },
+    "session": {
+      "via": "participants",
+      "model": "session"
+    }
+  }
+}
